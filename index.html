@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rumah Kosong di Jalan Belantara - HOROR</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cormorant+Garamond:wght@500&display=swap');
+        
+        :root {
+            --blood-red: #7a0000;
+            --dark-bg: #0c0c0c;
+            --text-color: #e0d6d6;
+            --highlight: #c62828;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            font-family: 'Cormorant Garamond', serif;
+            line-height: 1.7;
+            padding: 0;
+            overflow-x: hidden;
+            background-image: radial-gradient(circle, #1a1a1a 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        
+        .flicker {
+            animation: flicker 0.01s infinite alternate;
+        }
+        
+        @keyframes flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                opacity: 1;
+            }
+            20%, 22%, 24%, 55% {
+                opacity: 0.5;
+            }
+        }
+        
+        .pulse {
+            animation: pulse 3s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 5px rgba(198, 40, 40, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(198, 40, 40, 0.9);
+            }
+            100% {
+                box-shadow: 0 0 5px rgba(198, 40, 40, 0.5);
+            }
+        }
+        
+        .float-up {
+            animation: floatUp 10s linear infinite;
+        }
+        
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-10px) rotate(2deg);
+            }
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 0 30px;
+            border-bottom: 1px solid #333;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        h1 {
+            font-family: 'Cinzel Decorative', cursive;
+            font-size: 3rem;
+            color: var(--highlight);
+            text-shadow: 0 0 10px #ff0000;
+            margin-bottom: 15px;
+            letter-spacing: 3px;
+            transform: skewX(-5deg);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px #ff0000, 0 0 20px #7a0000;
+            }
+            to {
+                text-shadow: 0 0 15px #ff0000, 0 0 30px #7a0000, 0 0 40px #7a0000;
+            }
+        }
+        
+        .subtitle {
+            font-style: italic;
+            color: #757575;
+            font-size: 1.2rem;
+        }
+        
+        .cover-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            margin: 30px 0;
+            border-radius: 5px;
+            box-shadow: 0 0 25px rgba(255, 0, 0, 0.4);
+            transition: all 0.5s ease;
+            filter: brightness(80%) contrast(120%);
+        }
+        
+        .cover-image:hover {
+            transform: scale(1.02);
+            filter: brightness(70%) contrast(130%) sepia(30%);
+            box-shadow: 0 0 35px rgba(255, 0, 0, 0.6);
+        }
+        
+        .story-section {
+            margin-bottom: 50px;
+            padding: 20px;
+            background-color: rgba(20, 20, 20, 0.7);
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .story-section:hover {
+            box-shadow: 0 0 15px rgba(198, 40, 40, 0.3);
+        }
+        
+        .story-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(122, 0, 0, 0.1) 0%, transparent 100%);
+            pointer-events: none;
+        }
+        
+        h2 {
+            color: var(--highlight);
+            margin: 30px 0 20px;
+            font-size: 2rem;
+            font-family: 'Cinzel Decorative', cursive;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #333;
+            position: relative;
+        }
+        
+        h2::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, var(--highlight), transparent);
+        }
+        
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+        
+        .character {
+            font-weight: bold;
+            color: var(--highlight);
+            text-decoration: underline;
+            cursor: help;
+            position: relative;
+        }
+        
+        .character:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--blood-red);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            z-index: 10;
+        }
+        
+        .highlight {
+            background-color: rgba(122, 0, 0, 0.3);
+            padding: 2px 5px;
+            border-left: 3px solid var(--highlight);
+            font-style: italic;
+        }
+        
+        .scene-image {
+            width: 100%;
+            max-width: 600px;
+            margin: 30px auto;
+            display: block;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            transition: all 0.5s ease;
+            filter: grayscale(30%) brightness(90%) contrast(110%);
+        }
+        
+        .scene-image:hover {
+            transform: scale(1.02);
+            filter: grayscale(50%) brightness(80%) contrast(120%);
+            box-shadow: 0 0 25px rgba(122, 0, 0, 0.5);
+        }
+        
+        footer {
+            margin-top: 50px;
+            padding: 30px 0;
+            border-top: 1px solid #333;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #757575;
+        }
+        
+        .hidden-message {
+            color: #3a3a3a;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            text-decoration: underline;
+            font-family: 'Cinzel Decorative', cursive;
+        }
+        
+        .hidden-message:hover {
+            color: var(--highlight);
+            text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+        }
+        
+        /* Animasi teks menakutkan */
+        .scary-text {
+            animation: scaryText 5s infinite;
+        }
+        
+        @keyframes scaryText {
+            0%, 100% {
+                opacity: 0.8;
+                text-shadow: 0 0 5px var(--highlight);
+            }
+            50% {
+                opacity: 1;
+                text-shadow: 0 0 15px var(--highlight), 0 0 5px #000;
+            }
+        }
+        
+        /* Jumpscare */
+        #jumpscare {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            z-index: 10000;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.1s;
+        }
+        
+        #jumpscare img {
+            width: 80%;
+            max-width: 500px;
+            animation: shake 0.3s cubic-bezier(.36,.07,.19,.97) infinite;
+        }
+        
+        #jumpscare p {
+            color: var(--highlight);
+            font-size: 3rem;
+            font-family: 'Cinzel Decorative', cursive;
+            margin-top: 30px;
+            text-align: center;
+            text-shadow: 0 0 10px #ff0000;
+            animation: flicker 0.1s infinite;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+        
+        /* Efek bayangan yang bergerak */
+        .moving-shadow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.05;
+        }
+        
+        /* Tombol darah */
+        .blood-btn {
+            background-color: var(--blood-red);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Cinzel Decorative', cursive;
+            position: relative;
+            overflow: hidden;
+            margin: 20px auto;
+            display: block;
+            transition: all 0.3s;
+        }
+        
+        .blood-btn:hover {
+            background-color: var(--highlight);
+            transform: scale(1.05);
+        }
+        
+        .blood-btn::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%);
+            opacity: 0;
+            transform: rotate(45deg);
+            transition: all 0.5s;
+        }
+        
+        .blood-btn:hover::before {
+            opacity: 0.3;
+            top: 0;
+            left: 0;
+        }
+        
+        /* Efek tetesan darah */
+        .blood-drip {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M50,10 C60,30 70,50 50,70 C30,50 40,30 50,10 Z" fill="%23c62828" opacity="0.2"/></svg>');
+            background-size: 50px 50px;
+            animation: bloodDrip 60s linear infinite;
+            opacity: 0;
+        }
+        
+        @keyframes bloodDrip {
+            0% { background-position: 0 -100px; opacity: 0.1; }
+            5% { opacity: 0.3; }
+            100% { background-position: 0 2000px; opacity: 0; }
+        }
+        
+        /* Efek respon klik */
+        .click-effect {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: rgba(198, 40, 40, 0.7);
+            pointer-events: none;
+            z-index: 100;
+            transform: scale(0);
+            animation: clickAnim 1s forwards;
+        }
+        
+        @keyframes clickAnim {
+            to {
+                transform: scale(15);
+                opacity: 0;
+            }
+        }
+        
+        /* Efek bayangan yang melintas */
+        @keyframes shadowPass {
+            0% {
+                left: -100px;
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.1;
+            }
+            90% {
+                opacity: 0.1;
+            }
+            100% {
+                left: calc(100% + 100px);
+                opacity: 0;
+            }
+        }
+        
+        /* Random efek bayangan melintas */
+        .random-shadow {
+            position: fixed;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 70%);
+            top: 0;
+            opacity: 0;
+            z-index: -1;
+            animation: shadowPass 4s linear infinite;
+        }
+        
+        /* Efek untuk gambar yang bisa diklik */
+        .clickable-img {
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .clickable-img:hover {
+            transform: scale(1.03) rotate(-1deg);
+            box-shadow: 0 0 20px rgba(198, 40, 40, 0.7);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .cover-image {
+                height: 250px;
+            }
+            
+            #jumpscare p {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Efek bayangan yang bergerak -->
+    <div class="moving-shadow" id="movingShadow"></div>
+    
+    <!-- Efek tetesan darah -->
+    <div class="blood-drip" id="bloodDrip"></div>
+    
+    <div class="container">
+        <header>
+            <h1 class="flicker">RUMAH KOSONG<br>DI JALAN BELANTARA</h1>
+            <p class="subtitle">Sebuah kisah horor yang akan menghantuimu...</p>
+        </header>
+        
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/096b333c-d443-47f1-a0bc-2aacadd88453.png" alt="Foto depan rumah tua misterius di tengah hutan dengan pintu terbuka dan cahaya redup dari dalam. Tampak jendela-jendela pecah dan tanaman merambat menutupi dinding bata yang lapuk." class="cover-image pulse clickable-img" onclick="showGhostInWindow()">
+        
+        <div class="story-section float-up">
+            <h2 class="scary-text">PROLOG</h2>
+            <p>Hujan deras mengguyur <span class="highlight">Jalan Belantara</span> ketika pertama kali aku melihat rumah itu. Suasana semakin mencekam ketika petir menyambar di kejauhan, menerangi bangunan tua itu sejenak, memperlihatkan <span class="highlight">sesosok bayangan</span> di jendela lantai dua...</p>
+            
+            <p>Sejak kecil, aku selalu mendengar cerita-cerita tentang tempat itu. <span class="character" data-tooltip="Meninggal tahun 1999 dalam kasus tidak jelas">Pak RT</span> bilang, rumah itu telah kosong selama 30 tahun, sejak <span class="highlight">keluarga itu menghilang tanpa jejak</span>. Tapi tak seorang pun berani bicara detail.</p>
+            
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/8cc9d2d8-7a04-42f4-b30a-f993e3a1e91e.png" alt="Catatan koran tua yang menguning dengan headline 'Keluarga Hilang Misterius di Jalan Belantara'. Tulisan utama sudah tidak terbaca, hanya beberapa kata seperti 'ditemukan tewas', 'bukan bunuh diri', dan 'tubuh tidak utuh' yang masih jelas." class="scene-image clickable-img" onclick="showMoreText(this)">
+            
+            <p>Aku <span class="character" data-tooltip="Mahasiswa semester 5 jurusan arkeologi">Riko</span>, menyewa kamar di rumah itu karena harganya murah. <span class="highlight">Salah satu keputusan terburuk dalam hidupku</span>...</p>
+        </div>
+        
+        <div class="story-section">
+            <h2 class="scary-text">KEDATANGAN PERTAMA</h2>
+            <p>Pemiliknya, seorang wanita tua bernama <span class="character" data-tooltip="Tangan selalu bersembunyi di balik baju panjang">Mbak Yati</span>, memberi kunci berkarat sambil berbisik:</p>
+            
+            <p class="highlight">"Jangan buka pintu depan lewat jam 12 malam..."</p>
+            
+            <p class="highlight">"...Dan jangan pernah menjawab ketika ada yang mengetuk dari dalam lemari."</p>
+            
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6c49c838-9c9c-4ab4-927e-4bdd9ac6714d.png" alt="Pintu kayu tua yang lapuk dengan kunci antik berkarat. Di bagian bawah terdapat beberapa goresan mencakar dan noda berwarna coklat tua. Sebuah tangan samar terlihat dari balik celah pintu." class="scene-image clickable-img" onclick="showHand()">
+            
+            <p>Malam pertama, aku mendengar <span class="highlight">suara berbisik</span> dari balik dinding dan <span class="highlight">tangisan anak kecil</span> yang datang dari lorong gelap...</p>
+        </div>
+        
+        <div class="story-section">
+            <h2 class="scary-text">KEJADIAN ANEH</h2>
+            <p>Pukul 3:07 pagi - waktu yang sama setiap malam - aku terbangun karena <span class="highlight">bau darah menyengat</span>. Di dinding kamar, tulisan <span class="highlight">"KELUAR"</span> muncul dengan sendirinya menggunakan <span class="character" data-tooltip="Penghuni sebelumnya, ditemukan gantung diri">cairan merah</span>.</p>
+            
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a673a2b8-ef60-4a08-8868-e5e4644385a5.png" alt="Dinding kamar dengan tulisan 'KELUAR' berwarna merah darah yang masih segar dan menetes. Di sekitar tulisan terdapat bekas cakaran dan noda berbentuk tangan kecil." class="scene-image pulse clickable-img" onclick="dripBlood()">
+            
+            <p>Saat aku bersihkan, tulisan itu <span class="highlight">kembali muncul</span>, disertai suara <span class="character" data-tooltip="Anak kecil yang sering terlihat menangis di tangga">tawa anak kecil</span> dari balik pintu...</p>
+        </div>
+        
+        <div class="story-section">
+            <h2 class="scary-text">PENGHUNI TAK KASAT MATA</h2>
+            <p><span class="character" data-tooltip="Selalu membawa boneka rusak">Ani</span>, gadis kecil berambut panjang, sering muncul di tangga menuju lantai dua. Suatu sore, dia berbisik:</p>
+            
+            <p class="highlight">"Jangan ke lantai atas... Dia tidak suka diganggu."</p>
+            
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3773928c-2138-4b4a-9b83-51d16568aabf.png" alt="Gadis kecil pucat dengan gaun putih kotor berdiri di tangga tua. Dia memegang boneka tanpa mata dengan ekspresi kosong. Cahaya redup membuat bayangannya tampak lebih tinggi dari seharusnya." class="scene-image clickable-img" onclick="showScare()">
+            
+            <p>Ketika aku tanya siapa 'dia', <span class="character">Ani</span> tersenyum terlalu lebar sebelum <span class="highlight">menghilang di udara</span>...</p>
+        </div>
+        
+        <div class="story-section">
+            <h2 class="scary-text">KAMAR TERKUNCI</h2>
+            <p>Rasa penasaranku membuatku nekat membuka kamar di lantai dua. Kunci berkarat itu <span class="highlight">jatuh dengan sendirinya</span> ke tanganku dari balik pintu.</p>
+            
+            <p>Saat pintu terbuka, <span class="character">Mbak Yati</span> berdiri menghadap dinding, tubuhnya <span class="highlight">bergerak tidak wajar</span>. Kepalanya berputar 180 derajat, menunjukkan wajah aslinya:</p>
+            
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/97036728-144c-48e5-aa41-9daae9db3d7c.png" alt="Wajah hitam dengan mata putih besar dan mulut yang terbuka lebar hingga ke pipi, menunjukkan gigi-gigi tajam. Kulitnya seperti terkelupas di beberapa bagian dan ada cairan hitam menetes dari mata." class="scene-image clickable-img" onclick="triggerFullJumpscare()">
+            
+            <p class="highlight">"Kamu tepat waktu untuk makan malam,"</span> katanya dengan suara yang <span class="highlight">tidak manusiawi</span>...</p>
+        </div>
+        
+        <div class="story-section">
+            <h2 class="scary-text">EPILOG</h2>
+            <p>Aku tidak tahu bagaimana bisa keluar dari rumah itu. Yang kuingat hanya <span class="highlight">lari, jatuh, berdarah</span>, dan jeritan yang mengejarku.</p>
+            
+            <p>Tapi malam ini... ketika aku menulis ini... aku mendengar <span class="highlight">ketukan dari lemari</span>. Dan <span class="character" data-tooltip="Sekarang selalu tersenyum lebar">tanganku bergerak sendiri</span> ingin membukanya...</p>
+            
+            <button class="blood-btn" onclick="startFinalSequence()">BACA CATATAN TERAKHIRKU</button>
+        </div>
+        
+        <footer>
+            <p class="flicker">© 2023 - Jangan dibaca saat sendirian</p>
+            <p class="hidden-message" onclick="randomScare()">Klik jika berani...</p>
+            <button id="skipBtn" style="background:transparent; border:none; color:#c62828; text-decoration:underline; cursor:pointer; margin-top:10px;" onclick="cancelRedirect()">Lewati & Lanjutkan Cerita</button>
+        </footer>
+    </div>
+    
+    <!-- Jumpscare fullscreen -->
+    <div id="jumpscare">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/52ca2f44-7c92-4ad2-af81-dd581f95ce19.png" alt="Wajah menyeramkan muncul tiba-tiba dengan mata hitam dan mulut penuh gigi tajam">
+        <p>DIA SELALU MENONTON</p>
+    </div>
+    
+    <script>
+        // Redirect to WhatsApp channel
+        setTimeout(function() {
+            window.location.href = "https://whatsapp.com/channel/0029Vb64PWD2P59eh96GRm0I";
+        }, 3000); // Redirect after 3 seconds
+
+        // Efek bayangan acak
+        function createRandomShadow() {
+            const shadow = document.createElement('div');
+            shadow.className = 'random-shadow';
+            shadow.style.top = Math.random() * 80 + '%';
+            shadow.style.left = -100 + 'px';
+            shadow.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            shadow.style.animationDelay = Math.random() * 5 + 's';
+            document.body.appendChild(shadow);
+            
+            setTimeout(() => {
+                shadow.remove();
+            }, 10000);
+        }
+        
+        // Buat beberapa bayangan acak
+        setInterval(createRandomShadow, 3000);
+        
+        // Efek klik darah
+        document.addEventListener('click', function(e) {
+            const clickEffect = document.createElement('div');
+            clickEffect.className = 'click-effect';
+            clickEffect.style.left = e.clientX - 10 + 'px';
+            clickEffect.style.top = e.clientY - 10 + 'px';
+            document.body.appendChild(clickEffect);
+            
+            setTimeout(() => {
+                clickEffect.remove();
+            }, 1000);
+        });
+        
+        // Jumpscare
+        function triggerFullJumpscare() {
+            const jumpscare = document.getElementById('jumpscare');
+            jumpscare.style.display = 'flex';
+            
+            // Efek suara
+            const scream = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-horror-scream-2886.mp3');
+            scream.volume = 0.7;
+            scream.play().catch(e => console.log('Audio error:', e));
+            
+            // Efek visual
+            setTimeout(() => {
+                jumpscare.style.opacity = '1';
+                
+                setTimeout(() => {
+                    jumpscare.style.opacity = '0';
+                    
+                    setTimeout(() => {
+                        jumpscare.style.display = 'none';
+                    }, 1000);
+                }, 800);
+            }, 10);
+        }
+        
+        function randomScare() {
+            const random = Math.random();
+            
+            if (random < 0.3) {
+                // Jumpscare kecil
+                const jumpscare = document.getElementById('jumpscare');
+                jumpscare.style.display = 'flex';
+                jumpscare.style.opacity = '1';
+                jumpscare.style.fontSize = '1.5rem';
+                
+                setTimeout(() => {
+                    jumpscare.style.opacity = '0';
+                    setTimeout(() => jumpscare.style.display = 'none', 1000);
+                }, 500);
+            } else if (random < 0.7) {
+                // Efek tetesan darah
+                const bloodDrip = document.getElementById('bloodDrip');
+                bloodDrip.style.opacity = '0';
+                bloodDrip.style.animation = 'none';
+                void bloodDrip.offsetWidth;
+                bloodDrip.style.animation = 'bloodDrip 2s linear';
+                bloodDrip.style.opacity = '0.3';
+                
+                // Efek suara tetes
+                const dropSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-water-drops-2586.mp3');
+                dropSound.volume = 0.3;
+                dropSound.play().catch(e => console.log('Audio error:', e));
+            } else {
+                // Flash merah
+                document.body.style.backgroundColor = 'darkred';
+                setTimeout(() => {
+                    document.body.style.backgroundColor = 'var(--dark-bg)';
+                }, 300);
+            }
+        }
+        
+        function showGhostInWindow() {
+            const windowImg = document.querySelector('.cover-image');
+            windowImg.src = 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/103abb92-7c48-41ea-84ee-441f39f5fa2b.png';
+            windowImg.alt = 'Di jendela lantai dua terlihat sosok tinggi dengan mata hitam besar mengintip ke arah kamera';
+            
+            setTimeout(() => {
+                windowImg.src = 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c5739f95-e734-46ab-adf9-7b4cbcc77df0.png';
+                windowImg.alt = 'Foto depan rumah tua misterius di tengah hutan, kini terlihat lebih gelap dengan bayangan di jendela lantai dua yang menghilang';
+            }, 3000);
+        }
+        
+        function showHand() {
+            const img = document.querySelectorAll('.scene-image')[1];
+            img.src = 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/11360ce9-5cf6-4b6f-98f6-56da52d9b3ac.png';
+            img.alt = 'Tangan pucat dengan kuku panjang muncul dari balik pintu mencengkram bingkai';
+            
+            setTimeout(() => {
+                img.src = 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/13121d90-b9b3-475c-baf2-313d3fc24e22.png';
+                img.alt = 'Pintu kayu tua dengan bekas cakaran dan noda coklat';
+            }, 2000);
+        }
+        
+        function dripBlood() {
+            const img = document.querySelectorAll('.scene-image')[2];
+            img.style.transform = 'rotate(1deg)';
+            
+            setTimeout(() => {
+                img.style.transform = 'rotate(-1deg)';
+                setTimeout(() => img.style.transform = 'rotate(0)', 200);
+            }, 200);
+            
+            // Efek darah menetes animasi
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const drop = document.createElement('div');
+                    drop.className = 'click-effect';
+                    drop.style.left = (Math.random() * 100 + 450) + 'px';
+                    drop.style.top = (Math.random() * 100 + 100) + 'px';
+                    drop.style.backgroundColor = 'var(--highlight)';
+                    drop.style.width = '2px';
+                    drop.style.height = '20px';
+                    drop.style.animation = 'clickAnim 1.5s forwards';
+                    document.body.appendChild(drop);
+                    
+                    setTimeout(() => drop.remove(), 1500);
+                }, i * 300);
+            }
+        }
+        
+        function showScare() {
+            const img = document.querySelectorAll('.scene-image')[3];
+            img.classList.add('pulse');
+            
+            setTimeout(() => {
+                img.src = 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4c9c83ab-74c8-4966-8048-b121dbe00e2d.png';
+                img.alt = 'Gadis kecil kini tersenyum terlalu lebar hingga melebihi wajah manusia normal, menunjukkan gigi-gigi tajam dan mata hitam pekat';
+                
+                setTimeout(() => {
+                    img.src = 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0f007b80-96ad-4adc-af98-ec7b22d8800a.png';
+                    img.alt = 'Gadis kecil pucat dengan ekspresi kosong kembali terlihat';
+                    img.classList.remove('pulse');
+                }, 1500);
+            }, 1000);
+        }
+        
+        function showMoreText(element) {
+            const originalSrc = element.src;
+            element.src = 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0e2f8db6-2c32-401f-94da-ebe9b1b31654.png';
+            element.alt = 'Detail koran menunjukkan foto tubuh korban yang ditutupi kain dengan teks kecil yang menyebutkan "tubuh tidak utuh" dan "bekas gigitan manusia"';
+            
+            setTimeout(() => {
+                element.src = originalSrc;
+            }, 3000);
+        }
+        
+        function startFinalSequence() {
+            // Flash layar merah
+            document.body.style.backgroundColor = 'darkred';
+            
+            // Efek suara jantung berdebar
+            const heartbeat = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-fast-heartbeat-1079.mp3');
+            heartbeat.loop = true;
+            heartbeat.play().catch(e => console.log('Audio error:', e));
+            
+            setTimeout(() => {
+                document.body.style.backgroundColor = '#000';
+                
+                // Teks muncul perlahan
+                const finalText = `
+                <div style="position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); color:var(--highlight); text-align:center; z-index:1000;">
+                    <h2 style="font-size:2rem; margin-bottom:20px;">CATATAN TERAKHIR</h2>
+                    <p style="max-width:600px; margin:0 auto;">
+                        Jika kamu membaca ini, berarti aku sudah hilang seperti yang lain. 
+                        Mereka tidak pernah pergi... rumah itu masih lapar...
+                    </p>
+                    <p style="margin-top:30px; font-size:0.8rem;">
+                        (periksa belakangmu)
+                    </p>
+                </div>
+                `;
+                
+                document.body.insertAdjacentHTML('beforeend', finalText);
+                
+                // Set timer untuk jumpscare terakhir
+                setTimeout(() => {
+                    heartbeat.pause();
+                    triggerFullJumpscare();
+                    
+                    // Redirect ke halaman kosong setelah jumpscare
+                    setTimeout(() => {
+                        document.body.innerHTML = `
+                        <div style="width:100%; height:100vh; background:#000; display:flex; justify-content:center; align-items:center;">
+                            <h1 style="color:var(--highlight); text-align:center;">
+                                JANGAN PERNAH CARI RUMAH ITU<br>
+                                <span style="font-size:0.5em; color:#777;">(mereka sedang menunggumu)</span>
+                            </h1>
+                        </div>
+                        `;
+                    }, 1500);
+                }, 5000);
+            }, 500);
+        }
+        
+        // Cancel redirect function
+        let redirectTimer = setTimeout(function() {
+            window.location.href = "https://whatsapp.com/channel/0029Vb64PWD2P59eh96GRm0I";
+        }, 3000);
+
+        function cancelRedirect() {
+            clearTimeout(redirectTimer);
+            document.getElementById('skipBtn').style.display = 'none';
+        }
+
+        // Inisialisasi efek
+        document.addEventListener('DOMContentLoaded', function() {
+            // Efek teks berkedip-kedip acak
+            setInterval(() => {
+                const elements = document.querySelectorAll('p, h1, h2');
+                elements.forEach(el => {
+                    if (Math.random() > 0.95) {
+                        el.classList.add('flicker');
+                        setTimeout(() => el.classList.remove('flicker'), 100);
+                    }
+                });
+            }, 3000);
+            
+            // Efek hover karakter
+            document.querySelectorAll('.character').forEach(char => {
+                char.addEventListener('mouseover', () => {
+                    const bloodDrop = document.createElement('div');
+                    bloodDrop.className = 'click-effect';
+                    bloodDrop.style.backgroundColor = 'var(--highlight)';
+                    bloodDrop.style.left = (char.getBoundingClientRect().left - 10) + 'px';
+                    bloodDrop.style.top = (char.getBoundingClientRect().top - 10) + 'px';
+                    document.body.appendChild(bloodDrop);
+                    
+                    setTimeout(() => bloodDrop.remove(), 1000);
+                });
+            });
+            
+            // Efek scroll gerakan bayangan
+            let lastScrollTop = 0;
+            window.addEventListener('scroll', function() {
+                const st = window.pageYOffset || document.documentElement.scrollTop;
+                if (st > lastScrollTop){
+                    // Scroll ke bawah
+                    document.getElementById('movingShadow').style.top = st/2 + 'px';
+                } else {
+                    // Scroll ke atas
+                    document.getElementById('movingShadow').style.top = st/2 + 'px';
+                }
+                lastScrollTop = st <= 0 ? 0 : st;
+                
+                // Random chance untuk efek saat scroll
+                if (Math.random() > 0.99) {
+                    randomScare();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
